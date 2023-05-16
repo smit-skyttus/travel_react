@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import "../Styles/Header.css";
-import Logo from "../Images/headout.png";
-import Select from "react-select";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../store";
-import { getCityList } from "../../store/action";
+import React from "react";
+import {Link } from 'react-router-dom';
+import '../Styles/Header.css';
+import Select from 'react-select';
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 const navigationData = [
   {
     id: 1,
@@ -29,34 +27,10 @@ const navigationData = [
   },
 ];
 
-const smallSearchbar = {
-  option: (provided: any, state: any) => ({
-    ...provided,
-    borderBottom: "none",
-    color: state.isSelected ? "red" : "#727272",
-    padding: 10,
-    cursor: "pointer",
-    background: state.isSelected ? "white" : "white",
-    fontSize: "13px",
-    textAlign: "left",
-    paddingLeft: "20px",
-    width: 150,
-  }),
-  control: () => ({
-    width: 150,
-    display: "flex",
-    fontSize: "11px",
-    marginLeft: "15px",
-  }),
-  singleValue: (provided: any, state: any) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = "opacity 300ms";
 
-    return { ...provided, opacity, transition };
-  },
-};
 const HeaderNav = () => {
   return (
+    
     <div className="header-wrap">
       <div className="header-wrapper navbar-fixed-top">
         <div className="header-left">
@@ -64,22 +38,24 @@ const HeaderNav = () => {
             <div className="first-line">
               <Link to={{ pathname: `/` }}>
                 <div>
-                  <img id="logo" src={Logo} alt="RS" />
+                
+             <img id="logo" src='https://i.postimg.cc/pdnt2Zgs/logo.png' alt='my logo img' className='logo' />
+     
                 </div>
-              </Link>
+              </Link> 
               <div className="select-city">
                 <SearchBar
-                  style={smallSearchbar}
-                  //   history={this.props.history}
-                  //   selectedCity={this.props.selectedCity}
+                  style = {smallSearchbar}
+                //   history={this.props.history}
+                //   selectedCity={this.props.selectedCity}
                 />
               </div>
               <div className="select-experience">
                 <input
                   type="text"
                   placeholder="Search for experiences"
-                  //   onChange={this.changeExperience}
-                  //   value={this.props.experience}
+                //   onChange={this.changeExperience}
+                //   value={this.props.experience}
                 />
                 <i className="fas fa-search" />
               </div>
@@ -142,8 +118,8 @@ const HeaderNav = () => {
               }}
             >
               <div className="download-app">
-                <img src="" id="mobile-app" alt="Download our App" />
-                <p style={{ color: "#24a1b2" }}>Download App</p>
+                {/* <img src={MobileApp} id="mobile-app" alt="Download our App" />
+                <p style={{ color: "#24a1b2" }}>Download App</p> */}
               </div>
             </Link>
           </div>
@@ -152,39 +128,63 @@ const HeaderNav = () => {
     </div>
   );
 };
-const options = [
-  { value: "new-york", label: "New York" },
-  { value: "las-vegas", label: "Las Vegas" },
-  { value: "rome", label: "Rome" },
-  { value: "paris", label: "Paris" },
-  { value: "london", label: "London" },
-  { value: "dubai", label: "Dubai" },
-  { value: "barcelona", label: "Barcelona" },
-  { value: "madrid", label: "Madrid" },
-  { value: "singapore", label: "Singapore" },
-  { value: "venice", label: "Venice" },
-  { value: "milan", label: "Milan" },
-  { value: "naples", label: "Naples" },
-  { value: "budapest", label: "Budapest" },
-  { value: "edinburg", label: "Edinburg" },
-  { value: "florence", label: "Florence" },
-];
+const smallSearchbar = {
+  option : (provided:any, state:any) => ({
+    ...provided,
+    borderBottom: 'none',
+    color: state.isSelected ? 'red' : '#727272',
+    padding: 10,
+    cursor: 'pointer',
+    background: state.isSelected ? 'white' : 'white',
+    fontSize: '13px',
+    textAlign: 'left',
+    paddingLeft: '20px',
+    width: 150
+  }),
+  control: () => ({
+    width: 150,
+    display: 'flex',
+    fontSize: '11px',
+    marginLeft: '15px'
+  }),
+  singleValue: (provided:any, state:any) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = 'opacity 300ms';
 
-const SearchBar = (props: any) => {
-  const { city }: any = useSelector((state) => state);
-  
-
-  return (
-    <Select
-      styles={props.style}
-      placeholder="Select City"
-      // value={selectedOption}
-      // onChange={this.handleChange}
-      options={city.cityList}
-      getOptionLabel={(option:any) => option.cityName}
-      getOptionValue={(option:any) => option.cityName}
-      className="city-select-dropdown"
-    />
-  );
+    return { ...provided, opacity, transition };
+  }
 };
+const options = [
+  { value: 'new-york', label: 'New York' },
+  { value: 'las-vegas', label: 'Las Vegas' },
+  { value: 'rome', label: 'Rome' },
+  { value: 'paris', label: 'Paris' },
+  { value: 'london', label: 'London' },
+  { value: 'dubai', label: 'Dubai' },
+  { value: 'barcelona', label: 'Barcelona' },
+  { value: 'madrid', label: 'Madrid' },
+  { value: 'singapore', label: 'Singapore' },
+  { value: 'venice', label: 'Venice' },
+  { value: 'milan', label: 'Milan' },
+  { value: 'naples', label: 'Naples' },
+  { value: 'budapest', label: 'Budapest' },
+  { value: 'edinburg', label: 'Edinburg' },
+  { value: 'florence', label: 'Florence' }
+];
+const SearchBar = (props:any) =>{
+    const {city}:any = useSelector(state=>state);
+  return(
+  <Select
+  styles={props.style}
+  placeholder="Select City"
+  // value={selectedOption}
+  // onChange={this.handleChange}
+  options={city.cityList}
+  getOptionLabel={(option:any) => option.cityName}
+  getOptionValue={(option:any) => option.cityName}
+  className="city-select-dropdown"
+/>
+  );
+}
+
 export default HeaderNav;

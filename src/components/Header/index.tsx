@@ -1,39 +1,20 @@
 import React, { useState } from "react";
 import Background from "./Background";
 import HeaderNav from "./HeaderNav";
+import Select from 'react-select';
 import '../Styles/Header.css';
-import Select from "react-select";
-import { useSelector } from "react-redux";
-
-const options = [
-  { value: 'New York', label: 'New York' },
-  { value: 'Las Vegas', label: 'Las Vegas' },
-  { value: 'Rome', label: 'Rome' },
-  { value: 'Paris', label: 'Paris' },
-  { value: 'London', label: 'London' },
-  { value: 'Dubai', label: 'Dubai' },
-  { value: 'Barcelona', label: 'Barcelona' },
-  { value: 'Madrid', label: 'Madrid' },
-  { value: 'Singapore', label: 'Singapore' },
-  { value: 'Venice', label: 'Venice' },
-  { value: 'Milan', label: 'Milan' },
-  { value: 'Naples', label: 'Naples' },
-  { value: 'Budapest', label: 'Budapest' },
-  { value: 'Edinburg', label: 'Edinburg' },
-  { value: 'Florence', label: 'Florence' }
-];
-
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const Index = () => {
     const [experience,setExperience] = useState("");
   return (
     <div>
-      <HeaderNav  />
+      <HeaderNav />
       <Background />
       <div className="search-bar-div">
         <div className="select-city-large">
           <i className="fas fa-map-marker" />
-          <SearchBar style={customStyles}  />
+          <SearchBar style={customStyles} />
         </div>
         <div className="select-experience-large">
           <input
@@ -46,11 +27,25 @@ const Index = () => {
         </div>
         <button id="go">Let's Go</button>
       </div>
-
-      
     </div>
   );
 };
+
+const SearchBar=(props:any)=>{
+  const {city}:any = useSelector(state=>state);
+
+  return(
+    <Select
+    styles={props.style}
+    placeholder="Select City"
+    options={city.cityList}
+    getOptionLabel={(option:any) => option.cityName}
+    getOptionValue={(option:any) => option.cityName}
+    className="city-select-dropdown"
+   
+  />
+  )
+}
 const customStyles = {
   option: (provided:any, state:any) => ({
     ...provided,
@@ -77,19 +72,5 @@ const customStyles = {
     return { ...provided, opacity, transition };
   }
 };
-const SearchBar = (props:any) => {
-  const { city }: any = useSelector((state) => state);
-  return(
-    <Select
-        styles={props.style}
-        placeholder="Select City"
-        // value={selectedOption}
-        // onChange={this.handleChange}
-        options={city.cityList}
-        getOptionLabel={(option:any) => option.cityName}
-        getOptionValue={(option:any) => option.cityName}
-        className="city-select-dropdown"
-      />
-  )
-}
+
 export default Index;
