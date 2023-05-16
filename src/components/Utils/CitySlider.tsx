@@ -1,12 +1,19 @@
-import React from "react";
-import Slider from "react-slick";
+import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import { Left, Right } from "../Arrows";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import CityCard from "./CityCard";
-import { Left, Right } from "./Arrow";
-import { useSelector } from "react-redux";
-  
+import { useSelector} from "react-redux/es/hooks/useSelector";
+import { getTopCities } from "../../store/actions";
+import {useDispatch} from "react-redux/es/hooks/useDispatch";
+import { AppDispatch } from "../../store";
+
 const CitySlider = () => {
- 
+  const { topCities }: any = useSelector((state) => state);
+  console.log(topCities);
+
   var settings = {
     infinite: true,
     speed: 500,
@@ -14,13 +21,13 @@ const CitySlider = () => {
     slidesToScroll: 5,
     nextArrow: <Right />,
     prevArrow: <Left />,
-  };
+  }; 
   return (
     <Slider {...settings}>
-      {topCitiesData &&
-        topCitiesData.map(({ id, city, url, description, route }) => (
-          <Link to={{ pathname: `/cities/${route}` }} key={id} className="link">
-            <CityCard city={city} url={url} description={description} />
+      {topCities.topCities &&
+        topCities.topCities.map(({ cityId, cityName, cityImage, cityDescription }:any) => (
+          <Link to={{ pathname: `/cities/${cityName}` }} key={cityId} className="link">
+            <CityCard city={cityName} url={cityImage} description={cityDescription} />
           </Link>
         ))}
     </Slider>
@@ -133,5 +140,4 @@ const topCitiesData = [
     url: "https://cdn-imgix.headout.com/cities/florence/images/mobile/morning.jpg?auto=compress&fm=webp&w=412.5&h=486&crop=faces&fit=min",
   },
 ];
-
 export default CitySlider;

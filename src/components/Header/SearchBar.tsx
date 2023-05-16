@@ -49,7 +49,7 @@ const   customStyles = {
   ];
   
 
-const  SearchBar = (props:any) => {
+const SearchBar = (props:any) => {
 
     const [selectedOption,setSelectedOption]= useState(null);
 
@@ -57,12 +57,11 @@ const  SearchBar = (props:any) => {
        setSelectedOption(selectedOption);
       };
   return (
-    
     <div className="search-bar">
       <div className="select-city-large">
         <div className="select-div">
           <Select
-            styles={props.style}
+            styles={customStyles}
             placeholder="Select City"
             options={options}
             value={selectedOption}
@@ -70,7 +69,7 @@ const  SearchBar = (props:any) => {
           />
         </div>
       </div>
-      
+      <div className="select-experience-large" />
       {/* <button id="go">Search</button> */}
     </div>
   );
