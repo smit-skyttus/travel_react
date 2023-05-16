@@ -1,22 +1,25 @@
-import {createSlice } from '@reduxjs/toolkit';
-import getCityList, { getTopCities } from '../actions';
+import { createSlice } from "@reduxjs/toolkit";
+import { getCityList } from "../action";
 
 const initialState = {
-    cityList:[],
-}
+  cityList: [],
+  isLoading: true,
+  errorMessage: "",
+};
 
 export const citySlice = createSlice({
-  name: "city",
+  name: "Rishabh",
   initialState,
-  extraReducers: (builder) => {
-    builder.addCase(getCityList.fulfilled, (state, action) => {
-        state.cityList = action.payload;
-    });
-    builder.addCase(getTopCities.fulfilled, (state, action) => {
-        state.cityList = action.payload;
-    });
+  reducers: {
+    
   },
-  reducers: {}
-})
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCityList.fulfilled, (state, action) => { 
+        state.cityList = action.payload;
+      })
+      
+  },
+});
 
 export default citySlice.reducer;
