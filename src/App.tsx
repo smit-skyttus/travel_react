@@ -1,22 +1,14 @@
-import React,{useEffect} from 'react';
-import './App.css';
+import React,{useEffect,useState} from 'react';
 import PageRoutes from './Routes';
-import getCityList, { getTopCities } from './store/actions';
-import { useSelector, useDispatch } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCityList } from './store/action';
 import { AppDispatch } from './store';
 
 function App() {
-  const dispatch =useDispatch<AppDispatch>();
-  // const {city}:any = useSelector(state=>state);
-  // console.log(topCities);
-
-  useEffect(() => {
-    dispatch(getCityList());
-    dispatch(getTopCities());
-  }, [])
-
-
-  
+  const dispatch = useDispatch<AppDispatch>();
+    useEffect(()=> {
+       dispatch(getCityList())
+    },[])
   return (
     <div className="App">
       <PageRoutes />
