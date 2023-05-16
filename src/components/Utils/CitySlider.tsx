@@ -13,7 +13,6 @@ import { AppDispatch } from "../../store";
 const CitySlider = () => {
   const { topCities }: any = useSelector((state) => state);
   console.log(topCities);
-
   var settings = {
     infinite: true,
     speed: 500,

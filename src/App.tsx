@@ -4,8 +4,10 @@ import PageRoutes from './Routes';
 import getCityList, { getTopCities } from './store/actions';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { AppDispatch } from './store';
+import { getTopCities } from './store/actions';
 
 function App() {
+
   const dispatch =useDispatch<AppDispatch>();
   // const {city}:any = useSelector(state=>state);
   // console.log(topCities);
@@ -14,9 +16,6 @@ function App() {
     dispatch(getCityList());
     dispatch(getTopCities());
   }, [])
-
-
-  
   return (
     <div className="App">
       <PageRoutes />
