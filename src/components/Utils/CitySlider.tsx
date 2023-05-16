@@ -3,8 +3,10 @@ import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import CityCard from "./CityCard";
 import { Left, Right } from "./Arrow";
+import { useSelector } from "react-redux";
   
 const CitySlider = () => {
+ 
   var settings = {
     infinite: true,
     speed: 500,
