@@ -12,9 +12,7 @@ export const citySlice = createSlice({
     builder.addCase(getCityList.fulfilled, (state, action) => {
         state.cityList = action.payload;
     });
-    builder.addCase(getTopCities.fulfilled, (state, action) => {
-        state.cityList = action.payload;
-    });
+    
   },
   reducers: {}
 })

@@ -6,13 +6,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CityCard from "./CityCard";
 import { useSelector} from "react-redux/es/hooks/useSelector";
-import { getTopCities } from "../../store/actions";
+import { getHotelListByCityId, getTopCities } from "../../store/actions";
 import {useDispatch} from "react-redux/es/hooks/useDispatch";
 import { AppDispatch } from "../../store";
 
 const CitySlider = () => {
   const { topCities }: any = useSelector((state) => state);
-  console.log(topCities);
+  // consle.log(topCities);
+  const dispatch =useDispatch<AppDispatch>();
 
   var settings = {
     infinite: true,
@@ -22,11 +23,13 @@ const CitySlider = () => {
     nextArrow: <Right />,
     prevArrow: <Left />,
   }; 
+ 
+  
   return (
     <Slider {...settings}>
       {topCities.topCities &&
         topCities.topCities.map(({ cityId, cityName, cityImage, cityDescription }:any) => (
-          <Link to={{ pathname: `/cities/${cityName}` }} key={cityId} className="link">
+          <Link to={{ pathname: `/${cityName}` }} key={cityId} className="link">
             <CityCard city={cityName} url={cityImage} description={cityDescription} />
           </Link>
         ))}

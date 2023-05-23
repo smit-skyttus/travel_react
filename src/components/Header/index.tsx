@@ -4,6 +4,7 @@ import HeaderNav from "./HeaderNav";
 import Select from 'react-select';
 import '../Styles/Header.css';
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import SearchBar from "./SearchBar";
 
 const Index = () => {
     const [experience,setExperience] = useState("");
@@ -12,10 +13,7 @@ const Index = () => {
       <HeaderNav />
       <Background />
       <div className="search-bar-div">
-        <div className="select-city-large">
-          <i className="fas fa-map-marker" />
-          <SearchBar style={customStyles} />
-        </div>
+       
         <div className="select-experience-large">
           <input
             type="text"
@@ -31,21 +29,7 @@ const Index = () => {
   );
 };
 
-const SearchBar=(props:any)=>{
-  const {city}:any = useSelector(state=>state);
 
-  return(
-    <Select
-    styles={props.style}
-    placeholder="Select City"
-    options={city.cityList}
-    getOptionLabel={(option:any) => option.cityName}
-    getOptionValue={(option:any) => option.cityName}
-    className="city-select-dropdown"
-   
-  />
-  )
-}
 const customStyles = {
   option: (provided:any, state:any) => ({
     ...provided,
