@@ -12,8 +12,8 @@ import { AppDispatch } from "../../store";
 
 const CitySlider = () => {
   const { topCities }: any = useSelector((state) => state);
-  // consle.log(topCities);
-  const dispatch =useDispatch<AppDispatch>();
+ 
+  console.log(topCities);
 
   var settings = {
     infinite: true,

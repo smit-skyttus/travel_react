@@ -8,7 +8,9 @@ import { AppDispatch } from './store';
 import { getTopCities } from './store/actions';
 import Index from './components/Header';
 
+
 function App() {
+
   const dispatch =useDispatch<AppDispatch>();
   // const {city}:any = useSelector(state=>state);
   // console.log(topCities);
@@ -18,9 +20,6 @@ function App() {
     dispatch(getTopCities());
     
   }, [])
-
-
-  
   return (
     <div className="App">
       <PageRoutes />
