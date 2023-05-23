@@ -1,77 +1,129 @@
-import React, { useState } from "react";
-import Select from "react-select";
+import React, { useState,useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import Select, { ActionMeta } from "react-select";
 
+import '../Styles/search.css';
 
-const   customStyles = {
-    option : (provided:any, state:any) => ({
-      ...provided,
-      borderBottom: 'none',
-      color: state.isSelected ? 'red' : '#727272',
-      padding: 10,
-      cursor: 'pointer',
-      background: state.isSelected ? 'white' : 'white',
-      fontSize: '13px',
-      textAlign: 'left',
-      paddingLeft: '20px',
-      width: 150
-    }),
-    control: () => ({
-      width: 150,
-      display: 'flex',
-      marginTop: '10px',
-      marginLeft: '30px',
-      fontSize: '14px'
-    }),
-    singleValue: (provided:any, state:any) => {
-      const opacity = state.isDisabled ? 0.5 : 1;
-      const transition = 'opacity 300ms';
+const city = [
+  "Select City",
+  "Gangtok",
+  "Surat",
+  "Cochin",
+  "Madurai",
+  "Chittaurgarh",
+  "Kozhikode",
+  "Dharamshala",
+  "Goa",
+  "Daman",
+  "Mathura",
+  "Amritsar",
+  "Matheran",
+  "Bangalore",
+  "Haridwar",
+  "Mumbai",
+  "Shimla",
+  "Valsad",
+  "Jajpur",
+  "Nainital",
+  "Tirupati",
+  "Delhi",
+  "Pondicherry",
+  "Thiruvananthapuram",
+  "Manali",
+  "Agra",
+  "Darjeeling",
+  "Jammu",
+  "Vapi",
+  "Kutch",
+  "Shirdi",
+  "Guwahati",
+  "Lonavala",
+  "Siliguri",
+  "Chennai",
+  "Allahabad",
+  "Mysore",
+  "Mussoorie",
+  "Shillong",
+  "Rishikesh",
+  "Khandala",
+  "Dalhousie",
+  "Kullu",
+  "Havelock Island",
+  "Udaipur",
+  "Alibag",
+  "Dwarka",
+  "Kolkata",
+  "Pushkar",
+  "Gulmarg",
+  "Aizawl",
+  "Chandigarh",
+  "Cuttack",
+  "Ujjain",
+  "Ahmedabad",
+  "Mount Abu",
+  "Nashik",
+  "Bodh Gaya",
+  "Pune",
+  "Somnath",
+  "Srinagar",
+  "Hyderabad",
+  "Diu",
+];
+
+const SearchBar = (props: any) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const result = location.pathname.replace("/", "");
+  console.log(result);
   
-      return { ...provided, opacity, transition };
-    }
+  const [selectOption,setSelectedOption] = useState('');
+  const handleChange = (event:any) => {
+    setSelectedOption(event.target.value);
+    changeUrl(event.target.value);
   };
-
-  const options = [
-    { value: 'New York', label: 'New York' },
-    { value: 'Las Vegas', label: 'Las Vegas' },
-    { value: 'Rome', label: 'Rome' },
-    { value: 'Paris', label: 'Paris' },
-    { value: 'London', label: 'London' },
-    { value: 'Dubai', label: 'Dubai' },
-    { value: 'Barcelona', label: 'Barcelona' },
-    { value: 'Madrid', label: 'Madrid' },
-    { value: 'Singapore', label: 'Singapore' },
-    { value: 'Venice', label: 'Venice' },
-    { value: 'Milan', label: 'Milan' },
-    { value: 'Naples', label: 'Naples' },
-    { value: 'Budapest', label: 'Budapest' },
-    { value: 'Edinburg', label: 'Edinburg' },
-    { value: 'Florence', label: 'Florence' }
-  ];
   
+  const history = useNavigate();
 
-const SearchBar = (props:any) => {
-
-    const [selectedOption,setSelectedOption]= useState(null);
-
-    const  handleChange = (selectedOption:any) => {
-       setSelectedOption(selectedOption);
-      };
+  const changeUrl = (option: any) => {
+    history(`/${option}`);
+  };
+  useEffect(() => {
+    if(result!== selectOption){
+      setSelectedOption(result);
+    }
+  },[result])
   return (
-    <div className="search-bar">
-      <div className="select-city-large">
-        <div className="select-div">
-          <Select
-            styles={customStyles}
-            placeholder="Select City"
-            options={options}
-            value={selectedOption}
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      <div className="select-experience-large" />
-      {/* <button id="go">Search</button> */}
-    </div>
+    
+    // <Select
+    //   styles={props.style}
+      
+    //   value={setSelectedOption}
+    //   onChange={handleSelectionChange}
+    //   options={myArray}
+    //   // getOptionLabel={(option: any) => option.cityName}
+    //   // getOptionValue={(option: any) => option.cityName}
+    //   className="city-select-dropdown"
+    // />
+    <select className="search" value={selectOption} placeholder="Select City"  onChange={(e)=>handleChange(e)} style={props.style}>
+        {
+          city.map((cur:any) =>{
+            if(cur == "Select City"){
+             return(
+              <option className="ops" value="" disabled selected>
+                  {cur}
+                </option>
+             )     
+            }
+              return( 
+                <option className="ops" value={cur}>
+                  {cur}
+                </option>
+              ) 
+          })
+        }
+      </select>
+     
   );
 };
 
